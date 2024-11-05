@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -x
 
 BASE_DIR=$(realpath "$(dirname "$0")")
 CMD_NAME="aws-vpn-client"
@@ -40,6 +41,10 @@ function parse_args() {
       --down)
         VPN_CLIENT_DOWN=$(parse_option_arg "$@")
         shift 2
+        ;;
+      *)
+        echo "Unknown option: $1"
+        exit 1
         ;;
     esac
   done

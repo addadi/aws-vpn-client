@@ -1,6 +1,6 @@
 # Maintainer: Thanh Nguyen <xtnguyen605@gmail.com>
 pkgname=aws-vpn-client
-pkgver=2.6.3
+pkgver=2.6.12
 pkgrel=1
 pkgdesc="A CLI solution to enable Linux distros to connect to AWS VPN infrastructure with SAML SSO"
 arch=('any')

@@ -32,6 +32,8 @@ Then in `./build` folder there should be 3 binaries:
 - `openvpn-glibc` for glibc platforms.
 - `aws-vpn-client`.
 
+The dockerfile are using just the latest versions of base images and packages. They are meant for one time openvpn creation and not for production so it's easier to revolve package issues with latest versions for me
+
 ### Patch a new OpenVPN version
 
 To generate a patch for a newer OpenVPN version, use the current latest as base:
@@ -41,14 +43,16 @@ $ FROM_VERSION=<current_latest> TO_VERSION=<upstream_latest> docker compose up g
 ```
 
 The `<upstream_latest>` version can be found at [OpenVPN GitHub tags](https://github.com/OpenVPN/openvpn/tags).
+If you're using Arch Linux, remember also to update the new version in `archlinux/PKGBUILD` and run `updpkgsums`
 
 ### OpenVPN config file
 
 Make sure you have:
 
-* `remote` option removed.
 * `auth-retry interact` option removed.
+* `auth-federate` option removed (custom AWS option not supported by openvpn).
 * (Optionally) `inactive 3600` option added.
+* `script-security 2` option added for allowing up and down scripts
 
 ## Authenticate and connect to the VPN
 
@@ -144,6 +148,7 @@ Under `arch-linux` folder, there's 2 files that enable Arch Linux users to integ
 
 ## Install
 
+If you're using Arch Linux, remember also to update the new version in `archlinux/PKGBUILD` and run `updpkgsums`
 Just run `make`, it'll prepare, install & clean-up the build files
 
 ## Configuration
